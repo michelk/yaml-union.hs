@@ -17,10 +17,17 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  -- exposed-modules:     
+  exposed-modules:     Data.Yaml.Override
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base
                       ,yaml
+                      ,unordered-containers
   hs-source-dirs:      src
   default-language:    Haskell2010
+
+test-suite test
+  type:       exitcode-stdio-1.0
+  main-is:    Example.hs
+  hs-source-dirs: tests
+  build-depends: base
