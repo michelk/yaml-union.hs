@@ -1,4 +1,4 @@
-module Data.Yaml.Override (decodeFiles) where
+module Data.Yaml.Override (decodeFiles, decodeFilesEither) where
 import qualified Data.HashMap.Strict as M
 import           Data.Maybe (catMaybes)
 import           Data.Yaml
@@ -6,6 +6,10 @@ import           Data.Yaml
 -- | Decode multiple YAML-files and override recurisvley field
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)
 decodeFiles fs =  fmap (parseMaybe parseJSON . Object) (readFiles fs)
+
+-- | Decode multiple YAML-files and override recurisvley field
+decodeFilesEither :: FromJSON a => [FilePath] -> IO (Either String a)
+decodeFilesEither fs = fmap (parseEither parseJSON . Object) (readFiles fs)
 
 readFiles :: [FilePath] -> IO Object
 readFiles fs =
