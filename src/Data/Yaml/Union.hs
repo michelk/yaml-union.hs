@@ -1,4 +1,4 @@
-module Data.Yaml.Override (decodeFiles, decodeFilesEither) where
+module Data.Yaml.Union (decodeFiles, decodeFilesEither) where
 import qualified Data.HashMap.Strict as M
 import           Data.Maybe (catMaybes)
 import           Data.Yaml
