@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveGeneric #-}
 module Example where
-import Data.Yaml.Override
+import Data.Yaml.Union
 import Data.Yaml
 import Data.Maybe
 import GHC.Generics
