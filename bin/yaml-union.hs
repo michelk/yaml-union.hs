@@ -16,7 +16,7 @@ cfg =
   -- strOption (short 'V' <> long "variable" <> metavar "VAR-DEF" <>
   --              help "Set variables of the yaml-file \
   --               \ (concatenation with ':', nesting with '.', eg 'lang=de:dict.blue=blau').") <*>
-  switch (short 'd' <> long "dashes" <> help "Whether to print dashes at beginning" ) <*>
+  switch (short 'd' <> long "dashes" <> help "Whether to print dashes at beginning and end" ) <*>
   some (argument str (metavar "YAML-FILES"))
 
 union :: Options -> IO ()

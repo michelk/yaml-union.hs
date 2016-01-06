@@ -26,6 +26,4 @@ union = M.unionWith dispatch
 
 dispatch :: Value -> Value -> Value
 dispatch (Object v1) (Object v2) = Object (v1 `union` v2)
-dispatch x@(Object v) _  = x
-dispatch _ y@(Object v)   = y
-dispatch x _   = x
+dispatch _ x   = x
