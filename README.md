@@ -1,7 +1,8 @@
 # Command-line program to union yaml-files
 
-- Travis: [[https://travis-ci.org/michelk/yaml-union.hs.svg?branch=master]]
-- Hackage: [[https://img.shields.io/hackage/v/yaml-union.svg?style=flat]]
+- Travis: ![](https://travis-ci.org/michelk/yaml-union.hs.svg?branch=master)
+- Hackage: ![](https://img.shields.io/hackage/v/yaml-union.svg?style=flat)
+
 The command-line program `yaml-union` unions yaml-files recursively.
 When a key appears in multiple files, the values will be overridden with the
 order given on the command-line. If both values are hashes, the overrides will
@@ -12,7 +13,7 @@ meta-data from external files.
 
 e.g.
 
-   yaml-union -d meta1.yaml meta2.yaml | pandoc text.md --template tmpl.html
+    yaml-union -d meta1.yaml meta2.yaml | pandoc text.md --template tmpl.html
 
 ## Installation
 
