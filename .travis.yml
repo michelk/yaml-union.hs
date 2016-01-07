@@ -1,7 +1,7 @@
 # NB: don't set `language: haskell` here
 
 env:
- - CABALVER=1.22 GHCVER=7.10.2 GHCOPTS=""
+ - CABALVER=1.22.5.0 GHCVER=7.10.3 GHCOPTS=""
 
 # Note: the distinction between `before_install` and `install` is not important.
 before_install:
