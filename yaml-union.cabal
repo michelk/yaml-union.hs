@@ -19,11 +19,16 @@ data-files:          README.md
 extra-source-files:  changelog.md, stack.yaml, yaml-union.1
 library
   exposed-modules:     Data.Yaml.Union
+                     , Data.Yaml.Dirs
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >= 4 && < 5
                      , unordered-containers
                      , yaml
+                     , filepath
+                     , aeson
+                     , text
+                     , vector
   hs-source-dirs:      src
   default-language:    Haskell2010
 
@@ -35,6 +40,16 @@ library
 --   default-language:    Haskell2010
 
 executable yaml-union 
+  build-depends: base
+               , bytestring
+               , optparse-applicative
+               , yaml
+               , yaml-union
+  hs-source-dirs:  bin
+  Main-Is:         yaml-union.hs
+  default-language:    Haskell2010
+
+executable yaml-concat
   build-depends: base
                , bytestring
                , optparse-applicative

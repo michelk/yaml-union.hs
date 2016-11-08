@@ -4,3 +4,8 @@ description:
     abstract: Ultra short description
     file: en.md
     image: img.png
+files: 
+- id: 1
+  caption: one
+- id: 2
+  caption: two

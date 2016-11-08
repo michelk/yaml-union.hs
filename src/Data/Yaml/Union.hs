@@ -17,13 +17,12 @@ readFiles fs =
      return . unions . catMaybes $ cfgs
 
 unions :: [Object] -> Object
-unions =
-  -- M.unions  . reverse
-  foldl1 union
+unions = foldl1 union
 
 union ::  Object ->  Object -> Object
 union = M.unionWith dispatch
 
 dispatch :: Value -> Value -> Value
 dispatch (Object v1) (Object v2) = Object (v1 `union` v2)
+--dispatch (Array v1) (Array v2) = undefined
 dispatch _ x   = x

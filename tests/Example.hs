@@ -3,24 +3,9 @@ module Example where
 import Data.Yaml.Union
 import Data.Yaml
 import Data.Maybe
-import GHC.Generics
 
-data Example = Example { title :: String
-                        ,author :: String
-                        ,description :: Desc
-                       }
-               deriving (Show, Generic)
-instance FromJSON Example
 
-data Desc =
-  Desc {abstract :: String
-       ,file :: FilePath
-       ,image :: FilePath}
-               deriving (Show, Generic)
-
-instance FromJSON Desc
-
-readEx :: [FilePath] -> IO Example
+readEx :: [FilePath] -> IO Object
 readEx fs = fmap fromJust (decodeFiles fs)
 
 main :: IO ()
