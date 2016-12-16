@@ -23,6 +23,7 @@ library
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >= 4 && < 5
+                     , bytestring
                      , unordered-containers
                      , yaml
                      , filepath

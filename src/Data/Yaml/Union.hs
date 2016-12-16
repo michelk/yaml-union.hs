@@ -1,7 +1,25 @@
-module Data.Yaml.Union (decodeFiles, decodeFilesEither) where
+module Data.Yaml.Union
+  ( decodeBytestrings
+  , decodeBytestringsEither
+  , decodeFiles
+  , decodeFilesEither
+  ) where
+
+import           Data.ByteString (ByteString)
 import qualified Data.HashMap.Strict as M
-import           Data.Maybe (catMaybes)
+import           Data.Maybe (catMaybes,mapMaybe)
 import           Data.Yaml
+
+decodeBytestrings
+  :: FromJSON a
+  => [ByteString] -> Maybe a
+decodeBytestrings = parseMaybe parseJSON . Object . unions . mapMaybe decode
+
+decodeBytestringsEither
+  :: FromJSON a
+  => [ByteString] -> Either String a
+decodeBytestringsEither =
+  parseEither parseJSON . Object . unions . mapMaybe decode
 
 -- | Decode multiple YAML-files and override recurisvley field
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)
