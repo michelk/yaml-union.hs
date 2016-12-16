@@ -6,6 +6,7 @@ module Data.Yaml.Union
   ) where
 
 import           Data.ByteString (ByteString)
+import           Data.Foldable
 import qualified Data.HashMap.Strict as M
 import           Data.Maybe (catMaybes,mapMaybe)
 import           Data.Vector (Vector)
@@ -37,7 +38,7 @@ readFiles fs =
      return . unions . catMaybes $ cfgs
 
 unions :: [Object] -> Object
-unions = foldl1 union
+unions = foldl' union M.empty
 
 union ::  Object ->  Object -> Object
 union = M.unionWith dispatch

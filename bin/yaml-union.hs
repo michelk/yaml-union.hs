@@ -1,5 +1,6 @@
 module Main where
 import Options.Applicative
+import Data.Monoid
 import qualified Data.Yaml as Y
 import Data.Yaml.Pretty
 import Data.Yaml.Union
