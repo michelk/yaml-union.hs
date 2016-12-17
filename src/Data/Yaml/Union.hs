@@ -13,22 +13,24 @@ import           Data.Vector (Vector)
 import qualified Data.Vector as Vec
 import           Data.Yaml
 
+-- | Decode multiple YAML strings and override fields recursively
 decodeBytestrings
   :: FromJSON a
   => [ByteString] -> Maybe a
 decodeBytestrings = parseMaybe parseJSON . Object . unions . mapMaybe decode
 
+-- | Decode multiple YAML strings and override fields recursively
 decodeBytestringsEither
   :: FromJSON a
   => [ByteString] -> Either String a
 decodeBytestringsEither =
   parseEither parseJSON . Object . unions . mapMaybe decode
 
--- | Decode multiple YAML-files and override recurisvley field
+-- | Decode multiple YAML-files and override fields recursively
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)
 decodeFiles fs =  fmap (parseMaybe parseJSON . Object) (readFiles fs)
 
--- | Decode multiple YAML-files and override recurisvley field
+-- | Decode multiple YAML-files and override fields recursively
 decodeFilesEither :: FromJSON a => [FilePath] -> IO (Either String a)
 decodeFilesEither fs = fmap (parseEither parseJSON . Object) (readFiles fs)
 
