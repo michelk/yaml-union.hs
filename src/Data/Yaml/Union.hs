@@ -6,9 +6,10 @@ module Data.Yaml.Union
   ) where
 
 import           Data.ByteString (ByteString)
+import qualified Data.ByteString  as Bytes
 import           Data.Foldable
 import qualified Data.HashMap.Strict as M
-import           Data.Maybe (catMaybes,mapMaybe)
+import           Data.Maybe (mapMaybe)
 import           Data.Vector (Vector)
 import qualified Data.Vector as Vec
 import           Data.Yaml
@@ -28,16 +29,11 @@ decodeBytestringsEither =
 
 -- | Decode multiple YAML-files and override fields recursively
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)
-decodeFiles fs =  fmap (parseMaybe parseJSON . Object) (readFiles fs)
+decodeFiles fs =  decodeBytestrings <$> mapM Bytes.readFile fs
 
 -- | Decode multiple YAML-files and override fields recursively
 decodeFilesEither :: FromJSON a => [FilePath] -> IO (Either String a)
-decodeFilesEither fs = fmap (parseEither parseJSON . Object) (readFiles fs)
-
-readFiles :: [FilePath] -> IO Object
-readFiles fs =
-  do cfgs <- mapM decodeFile fs
-     return . unions . catMaybes $ cfgs
+decodeFilesEither fs = decodeBytestringsEither <$> mapM Bytes.readFile fs
 
 unions :: [Object] -> Object
 unions = foldl' union M.empty
@@ -64,7 +60,7 @@ vecDeleteBy eq x ys
   | Vec.length ys == 0 = ys
   | otherwise =
     if x `eq` Vec.head ys
-      then (Vec.tail ys)
+      then Vec.tail ys
       else Vec.head ys `Vec.cons` vecDeleteBy eq x (Vec.tail ys)
 
 vecNubBy :: (a -> a -> Bool) -> Vector a -> Vector a
