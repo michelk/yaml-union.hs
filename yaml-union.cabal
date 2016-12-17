@@ -33,6 +33,7 @@ library
 
   hs-source-dirs:      src
   default-language:    Haskell2010
+  ghc-options: -Wall
 
 test-suite test
   type:       exitcode-stdio-1.0
@@ -50,6 +51,7 @@ test-suite test
                , yaml >=0.8.20 && <0.9
                , yaml-union >=0.0.1 && <0.1
   default-language:    Haskell2010
+  ghc-options: -Wall
 
 executable yaml-union 
   build-depends:  base >=4.0 && < 5
@@ -61,6 +63,7 @@ executable yaml-union
   hs-source-dirs:  bin
   Main-Is:         yaml-union.hs
   default-language:    Haskell2010
+  ghc-options: -Wall
 
 executable yaml-concat
   build-depends:  base >=4.0 && < 5
@@ -71,3 +74,4 @@ executable yaml-concat
   hs-source-dirs:  bin
   Main-Is:         yaml-union.hs
   default-language:    Haskell2010
+  ghc-options: -Wall

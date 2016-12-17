@@ -1,6 +1,5 @@
 module Main where
 import Options.Applicative
-import Data.Monoid
 import qualified Data.Yaml as Y
 import Data.Yaml.Pretty
 import Data.Yaml.Union
@@ -22,16 +21,16 @@ cfg =
 
 union :: Options -> IO ()
 union (Options{files = fs, dashes = dsh}) =
-  do s <- decodeFilesEither fs
+  do sOrErr <- decodeFilesEither fs
      let yaml =
-           case s of
+           case sOrErr of
              Left s -> error $ "Yaml-File parsing failed " ++ s
              Right x ->  x :: Y.Object
      let ymlStr = encodePretty defConfig yaml
-     let str = if dsh
+     let s = if dsh
                   then B.unlines [ B.pack "---",  ymlStr, B.pack "..."]
                   else ymlStr
-     B.putStrLn str
+     B.putStrLn s
 
 main :: IO ()
 main = execParser opts >>= union
