@@ -1,7 +1,8 @@
 module Data.Yaml.Union (decodeFiles, decodeFilesEither) where
 import qualified Data.HashMap.Strict as M
 import           Data.Maybe (catMaybes)
-import           Data.Yaml
+import           Data.Yaml hiding (decodeFile)
+import           Data.Yaml.Include (decodeFile)
 
 -- | Decode multiple YAML-files and override recurisvley field
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)

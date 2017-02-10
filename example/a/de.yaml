@@ -1,0 +1,11 @@
+title: Phantastischer Titel
+description: 
+    abstract:  Kurzbeschreibung
+    file: de.md 
+files: 
+- id: 1
+  file: image.png
+  caption: eins
+- id: 2
+  file: img.png
+  caption: zwei

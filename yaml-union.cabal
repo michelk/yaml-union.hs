@@ -29,6 +29,8 @@ library
                      , aeson
                      , text
                      , vector
+                     , directory
+                     , unix
   hs-source-dirs:      src
   default-language:    Haskell2010
 
@@ -45,16 +47,8 @@ executable yaml-union
                , optparse-applicative
                , yaml
                , yaml-union
+               , directory
   hs-source-dirs:  bin
   Main-Is:         yaml-union.hs
   default-language:    Haskell2010
 
-executable yaml-concat
-  build-depends: base
-               , bytestring
-               , optparse-applicative
-               , yaml
-               , yaml-union
-  hs-source-dirs:  bin
-  Main-Is:         yaml-union.hs
-  default-language:    Haskell2010
