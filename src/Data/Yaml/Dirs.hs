@@ -2,7 +2,7 @@
 module Data.Yaml.Dirs (unionDirs, decodeFiles) where
 
 import qualified Data.Yaml as Yaml
-import           Data.Maybe (catMaybes, fromJust)
+import           Data.Maybe (fromJust)
 import           System.FilePath
 import qualified Data.HashMap.Strict as M
 import qualified Data.Text as T
@@ -12,7 +12,6 @@ import Control.Monad
 import System.Directory
 import System.FilePath
 import System.Posix.Files
-
 
 unionDirs :: FilePath           -- ^ Filepath to union on
   -> [FilePath]                 -- ^ directories to traverse

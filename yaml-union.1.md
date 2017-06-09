@@ -27,7 +27,7 @@ meta-data from external files.
 
 `-d,--dashes` 
 
-  Wheter to print dashes at the beginning and end of the document
+  Whether to print dashes at the beginning and end of the document
 
 # TODO
 

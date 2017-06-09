@@ -2,10 +2,10 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                yaml-union
-version:             0.0.1
+version:             0.0.2
 synopsis:            Read multiple yaml-files and override fields recursively
 -- description:         
-homepage:            https://github.com/michelk/yaml-overrides.hs
+homepage:            https://github.com/michelk/yaml-union.hs
 license:             BSD3
 license-file:        LICENSE
 author:              Michel Kuhlmann
@@ -31,15 +31,29 @@ library
                      , vector
                      , directory
                      , unix
+                     , bytestring
+                     , vector
   hs-source-dirs:      src
   default-language:    Haskell2010
+  ghc-options: -Wall
 
--- test-suite test
---   type:       exitcode-stdio-1.0
---   main-is:    Example.hs
---   hs-source-dirs: tests
---   build-depends: base
---   default-language:    Haskell2010
+test-suite test
+  type:       exitcode-stdio-1.0
+  main-is:    Spec.hs
+  other-modules: UnionSpec
+  hs-source-dirs: spec
+  build-depends: QuickCheck
+               , base
+               , hspec
+               , quickcheck-instances
+               , scientific
+               , text
+               , unordered-containers
+               , vector
+               , yaml
+               , yaml-union
+  default-language:    Haskell2010
+  ghc-options: -Wall
 
 executable yaml-union 
   build-depends: base
@@ -51,4 +65,16 @@ executable yaml-union
   hs-source-dirs:  bin
   Main-Is:         yaml-union.hs
   default-language:    Haskell2010
+  ghc-options: -Wall
 
+executable yaml-concat
+  build-depends:  base
+                , bytestring
+                , optparse-applicative
+                , yaml
+                , yaml-union
+                , directory
+  hs-source-dirs:  bin
+  Main-Is:         yaml-union.hs
+  default-language:    Haskell2010
+  ghc-options: -Wall
