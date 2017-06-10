@@ -7,7 +7,7 @@ cache:
   - $HOME/.stack
 
 env:
- - CABALVER=1.22 GHCVER=8.0.1 GHCOPTS=""
+ - CABALVER=1.24 GHCVER=8.0.2 GHCOPTS=""
 
 # Note: the distinction between `before_install` and `install` is not important.
 before_install:
