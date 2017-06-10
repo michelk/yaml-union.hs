@@ -13,6 +13,7 @@ import System.Directory
 import System.FilePath
 import System.Posix.Files
 
+-- | Union a list directories with a common filename withem them
 unionDirs :: FilePath           -- ^ Filepath to union on
   -> [FilePath]                 -- ^ directories to traverse
   -> IO Yaml.Value
@@ -51,6 +52,7 @@ getDirectoryDirs d =
      let fs' = filter ( `notElem` [".",".." ]) fs
      filterM (\f -> doesDirectoryExist (d </> f))fs'
 
+-- | Decode directories either reverse sorted or not 
 decodeFiles :: Bool -> [FilePath] -> IO Yaml.Value
 decodeFiles sortKeysIncreasing fs =
   do vs <- mapM decodeFile (if sortKeysIncreasing then (sort fs) else (reverse . sort $ fs))
