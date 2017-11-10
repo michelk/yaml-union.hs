@@ -3,6 +3,7 @@ import Prelude hiding (getContents)
 import Data.ByteString (getContents)
 import System.Environment (getArgs)
 import System.Exit
+import System.IO (stderr, hPutStrLn)
 
 import Data.Yaml (Value, decodeFileEither, decodeEither')
 
@@ -12,10 +13,8 @@ helpMessage = putStrLn "Usage: yaml-validate FILE\nUse - as FILE to indicate std
 validate :: Show a => String -> Either a Value -> IO b
 validate f ejson =
   case ejson of
-    Left err -> do
-      putStrLn ("Error parsing " ++ f ++ "\n")
-      print err
-      exitFailure
+    Left err ->
+      hPutStrLn stderr ("Error parsing " ++ f ++ "\n\n" ++ (show err)) >> exitFailure
     Right _ -> exitSuccess
 
 main :: IO ()
