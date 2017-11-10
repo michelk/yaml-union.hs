@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                yaml-union
-version:             0.0.2
+version:             0.0.3
 synopsis:            Read multiple yaml-files and override fields recursively
 -- description:         
 homepage:            https://github.com/michelk/yaml-union.hs
@@ -52,6 +52,15 @@ test-suite test
                , vector
                , yaml
                , yaml-union
+  default-language:    Haskell2010
+  ghc-options: -Wall
+
+executable yaml-validate
+  build-depends: base
+               , bytestring
+               , yaml
+  hs-source-dirs:  bin
+  Main-Is:         yaml-validate.hs
   default-language:    Haskell2010
   ghc-options: -Wall
 
