@@ -34,9 +34,9 @@ union (Options {files = fs, dashes = dsh, recursive = recu,dirFile = unionF}) = 
   yaml <-
     if recu
        then do unionDirs unionF fs
-       else do s <- decodeFilesEither fs
+       else do sOrErr <- decodeFilesEither fs
                return
-                 (case s of
+                 (case sOrErr of
                     Left s -> error $ "Yaml-File parsing failed " ++ s
                     Right x -> x)
   let ymlStr = encodePretty defConfig yaml
