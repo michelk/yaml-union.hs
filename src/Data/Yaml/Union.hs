@@ -6,12 +6,11 @@ module Data.Yaml.Union
   ) where
 
 import           Data.ByteString (ByteString)
-import qualified Data.ByteString  as Bytes
 import           Data.Foldable
 import qualified Data.HashMap.Strict as M
-import           Data.Yaml hiding (decodeFile)
-import           Data.Yaml.Include (decodeFile)
-import           Data.Maybe (mapMaybe)
+import           Data.Yaml hiding (decodeFile, decodeFileEither)
+import           Data.Yaml.Include
+import           Data.Maybe (mapMaybe, fromJust )
 import           Data.Vector (Vector)
 import qualified Data.Vector as Vec
 
@@ -30,11 +29,28 @@ decodeBytestringsEither =
 
 -- | Decode multiple YAML-files and override fields recursively
 decodeFiles :: FromJSON a => [FilePath] -> IO (Maybe a)
-decodeFiles fs =  decodeBytestrings <$> mapM Bytes.readFile fs
+decodeFiles fs = do
+  s <-
+    mapM
+      (\f -> do
+         s <- decodeFile f
+         return $ fromJust s)
+      fs
+  return $ parseMaybe parseJSON . Object . unions $ s
 
 -- | Decode multiple YAML-files and override fields recursively
 decodeFilesEither :: FromJSON a => [FilePath] -> IO (Either String a)
-decodeFilesEither fs = decodeBytestringsEither <$> mapM Bytes.readFile fs
+decodeFilesEither fs = do
+  s <-
+    mapM
+      (\f -> do
+         s <- decodeFileEither f
+         case s of
+           Left err -> error (show err)
+           Right x -> return x)
+      fs
+  return $ parseEither parseJSON . Object . unions $ s
+
 
 unions :: [Object] -> Object
 unions = foldl' union M.empty

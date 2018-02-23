@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                yaml-union
-version:             0.0.3
+version:             0.0.5
 synopsis:            Read multiple yaml-files and override fields recursively
 -- description:         
 homepage:            https://github.com/michelk/yaml-union.hs
